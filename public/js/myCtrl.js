@@ -50,7 +50,7 @@ app.controller("conecction_excel", function ($scope, $http) {
     $scope.my_database = {};
     $scope.crear_coneccion = function () {
         //$http.post('/api/Cargar_base_de_datos');
-        var respuesta = $http.post('/api/Cargar_base_de_datos');
+        var respuesta = $http.post('/api/Cargar_base_de_datos', $scope.my_database);
         respuesta.success(function (respuesta) {
             if(respuesta){
                 alert("se ha cargado la base de datos exitosamente");

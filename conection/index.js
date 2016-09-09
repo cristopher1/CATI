@@ -7,13 +7,18 @@
 var fs = require('fs');
 var csv = require('ya-csv');
 var leer;
-module.exports = function cargar_base_de_datos(nombre) {
-        if(fs.exists('hhh.csv')){
+module.exports = function cargar_base_de_datos(nombre, callback) {
+    fs.exists(nombre, function (respuesta) {
+        if (respuesta) {
             leer = csv.createCsvFileReader(nombre);
-            return true;
+            /*leer.addListener('data', function (data) {
+             console.log(data);
+             });*/
+            callback(true);
         }
-        else{
-            return  false;
+        else {
+            callback(false);
         }
-    };
+    });
+};
 

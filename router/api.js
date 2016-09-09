@@ -137,12 +137,13 @@ router.delete('/usuarios/:id', function(req,res,next){
 });
 
 router.post('/Cargar_base_de_datos',function (req,res,next) {
-	var nombre = '../hhh.csv';
+	var nombre = req.body.nombre + '.csv';
 	try{
-		console.log("vamos bien");
 		//por lo visto no se pueden enviar numeros como respuestas
 		//res.send(algo), devuelve respuestas de cualtipo, por el momento se esta comportando como un return
-		res.send(excel(nombre));
+		excel(nombre, function (resultado) {
+			res.send(resultado);
+		})
 	}
 	//esto es por si la funcion no puede finalizar, la finalizamos. El next es el argi¿umento de devolucion de la funcion
 	catch(ex){
