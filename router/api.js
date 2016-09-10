@@ -90,6 +90,40 @@ try{
 	}
 });
 
+//funcion del admistrador
+router.put('/usuarios/:id', function(req,res,next){
+	try{
+
+		models.Usuario.findOne({ where: {id:req.params.id} }).then(function (user) {
+			//for(var x=0;x<user.length;x++){
+			//console.log(user.username);
+			if(req.body.username){
+				if(req.body.email) {
+					user.updateAttributes({
+						username: req.body.username,
+						email: req.body.email
+					}).then(function (result) {
+						res.json(result);
+					})
+				}
+				else {
+					user.updateAttributes({
+						username: req.body.username
+					}).then(function (result) {
+						res.json(result);
+					})
+				}
+
+			}
+		});
+	}
+	catch(ex){
+		console.error("Internal error:"+ex);
+		return next(ex);
+	}
+});
+
+//funcion del usuario
 router.put('/usuarios/:id', function(req,res,next){
 	try{
 
@@ -142,7 +176,7 @@ router.post('/Cargar_base_de_datos',function (req,res,next) {
 		//por lo visto no se pueden enviar numeros como respuestas
 		//res.send(algo), devuelve respuestas de cualtipo, por el momento se esta comportando como un return
 		excel(nombre, function (resultado) {
-			res.send(resultado);
+			res.send();
 		})
 	}
 	//esto es por si la funcion no puede finalizar, la finalizamos. El next es el argi¿umento de devolucion de la funcion

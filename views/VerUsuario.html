@@ -80,7 +80,8 @@
     <td>{{usuario.username}}</td>
     <td>{{usuario.password}}</td>
     <td>{{usuario.email}}</td>
-    <td> <button ng-click="deleteUsuario(usuario.id)">Eliminar</button> <button ng-click="Modificar(usuario.id)"> Modificar </button></td>
+    <td> <button ng-click="deleteUsuario(usuario.id)">Eliminar</button> <button ng-click="modificar_datos()"> Modificar contraseña</button></td>
+    <div ng-hide = modificar><td>nueva contraseña: <td> <input type="text" class="form-control" name="nombre" ng-bind="contrasenna"> <button> Modificar contraseña de usuario</button></div>
   </tr>
   </tbody>
 </table>
