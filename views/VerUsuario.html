@@ -64,7 +64,7 @@
   <h1>{{title}}</h1>
 </div>
 
-<table class="table">
+<table class="table" ng-controller="myCtrl">
 	<thead>
   		<tr>
     	  <th> ID </th>
@@ -80,7 +80,7 @@
     <td>{{usuario.username}}</td>
     <td>{{usuario.password}}</td>
     <td>{{usuario.email}}</td>
-    <td> Eliminar Modificar</td>
+    <td> <button ng-click="deleteUsuario(usuario.id)">Eliminar</button> <button ng-click="Modificar(usuario.id)"> Modificar </button></td>
   </tr>
   </tbody>
 </table>

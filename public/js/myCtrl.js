@@ -3,7 +3,7 @@
  */
 var app = angular.module("myApp",[]);
 
-app.controller("myCtrl", function($scope,$http) {
+app.controller("myCtrl", function($scope,$http,$window) {
     $scope.title="Listar Usuario";
     $scope.title2="Registrar Usuario";
     $scope.formData = {};
@@ -29,14 +29,17 @@ app.controller("myCtrl", function($scope,$http) {
             });
     };
     $scope.deleteUsuario = function(id) {
-        $http.delete('/api/todos/' + id)
+        $http.delete('/api/usuarios/' + id)
             .success(function(data) {
                 $scope.todos = data;
+                alert("se han eliminado los datos correctamente");
                 console.log(data);
             })
             .error(function(data) {
+                alert("no se pudieron eliminar los datos");
                 console.log('Error:' + data);
             });
+
     };
 });
 

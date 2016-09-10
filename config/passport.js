@@ -39,7 +39,7 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        connection.query("select * from Usuario where id = "+id,function(err,rows){
+        connection.query("select Usuario.*,Rol.permiso from Usuario,Rol where Usuario.id=Rol.UsuarioId and Usuario.id="+id,function(err,rows){
             done(err, rows[0]);
         });
     });
@@ -114,7 +114,8 @@ module.exports = function(passport) {
         },
         function(req, email, password, done) { // callback with email and password from our form
 
-            connection.query("SELECT * FROM `Usuario` WHERE `email` = '" + email + "'",function(err,rows){
+            connection.query("SELECT Usuario.id,Usuario.password,Usuario.username,Usuario.email,Rol.permiso from Usuario,Rol where Usuario.id=Rol.UsuarioId AND Usuario.email ='" + email +"'",function(err,rows) {
+                console.log(rows[0]);
                 if (err)
                     return done(err);
                 if (!rows.length) {

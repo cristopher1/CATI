@@ -23,19 +23,8 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 
-    app.get('/signup', function(req, res) {
-        // render the page and pass in any flash data if it exists
-        res.render('signup.html', { message: req.flash('signupMessage') });
-    });
-
-    // process the signup form
-    app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure profile section
-        failureRedirect : '/signup', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
-
     app.get('/profile', isLoggedIn, function(req, res) {
+        //console.log(req)
         res.render('profile.html', {
             user : req.user // get the user out of session and pass to template
         });
@@ -57,6 +46,14 @@ module.exports = function(app, passport) {
 
     app.get('/cargar_base_de_datos', function (req, res) {
         res.render('CargarBaseDeDatos.html');
+    });
+
+    app.get('/llamar', function (req, res) {
+        res.render('Llamar.html');
+    });
+
+    app.get('/modificar_usuario', function (req, res) {
+        res.render('ModificarUsuario.html');
     });
 }
 

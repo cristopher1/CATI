@@ -4,15 +4,15 @@
     <title>Node Authentication</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <style>
         body        { padding-top:80px; word-wrap:break-word; }
     </style>
 </head>
-<body>
+<body ng-app="">
 <div class="container">
-
     <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <h1><span class="fa fa-anchor"></span> Bienvenido <%= user.username%></h1>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
     </div>
 
@@ -21,12 +21,13 @@
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
             <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
-
+                <h3><span class="fa fa-user"></span> <%= user.permiso%></h3>
                 <p>
-                    <strong>id</strong>: <%= user.id %><br>
+                    <strong>El correo que utilizo para esta cuenta es: </strong><br>
                     <strong>email</strong>: <%= user.email %><br>
-                    <strong>password</strong>: <%= user.password %>
+                        <div ng-hide= "user.permiso != ADMIN"> ver usuarios <a href="/VerUsuario"> ir </a>.</div>
+                        <div ng-hide= "user.permiso != ENCUESTADOR"> Llamar <a href="/llamar"> ir </a>.</div>
+
                 </p>
 
             </div>
