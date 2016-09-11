@@ -2,7 +2,9 @@
  * Created by famancil on 21-08-16.
  */
 
+
 module.exports = function(app, passport) {
+
 
     app.get('/', function (req, res) {
         res.render('index.html', {title: 'Mi primer Aplicacion Web'});
@@ -30,32 +32,52 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/logout', function(req, res) {
+    app.get('/logout', isLoggedIn, function(req, res) {
         req.logout();
         res.redirect('/');
     });
 
 
-    app.get('/verUsuario', function (req, res) {
+    app.get('/verUsuario', isLoggedIn, function (req, res) {
         res.render('VerUsuario.html');
     });
 
-    app.get('/crearUsuario', function (req, res) {
+    app.get('/crearUsuario',isLoggedIn, function (req, res) {
         res.render('CrearUsuario.html', {title: 'Registrar Usuarios'});
     });
 
-    app.get('/cargar_base_de_datos', function (req, res) {
+    app.get('/cargar_base_de_datos', isLoggedIn, function (req, res) {
         res.render('CargarBaseDeDatos.html');
     });
 
-    app.get('/llamar', function (req, res) {
+    app.get('/llamar', isLoggedIn, function (req, res) {
         res.render('Llamar.html');
     });
 
-    app.get('/modificar_usuario', function (req, res) {
+    app.get('/modificar_usuario', isLoggedIn,function (req, res) {
         res.render('ModificarUsuario.html');
     });
+
+    app.post('/upload', function(req, res) {
+        var sampleFile;
+
+        if (!req.files) {
+            res.send('No files were uploaded.');
+            return;
+        }
+
+        sampleFile = req.files.archivo;
+        sampleFile.mv('./conection/'+sampleFile.name, function(err) {
+            if (err) {
+                res.status(500).send(err);
+            }
+            else {
+                res.send('File uploaded!');
+            }
+        });
+    })
 }
+
 
 function isLoggedIn(req, res, next) {
 

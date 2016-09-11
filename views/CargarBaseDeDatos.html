@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" ng-app = "myApp">
 <head>
-    <title>Cargar base de datos</title>
+    <title>Modificar usuario</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,19 +16,19 @@
     </style>
 </head>
 <body>
-<div class="container" ng-controller="conecction_excel">
-
+<div class="container" ng-controller="myCtrl">
     <div class="col-sm-6 col-sm-offset-3">
         <!-- LOGIN FORM -->
-        <form>
+        <form ref="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label>Nombre de la base de datos</label>
-                <input type="text" class="form-control" name="nombre" ng-model="my_database.nombre">
+                <h1>Cargar base de datos</h1><br>
+                <label>seleccione un archivo</label>
+                <input type="file" name="archivo">
             </div>
-            <button class="btn btn-primary btn-lg" ng-click = "crear_coneccion()">Cargar</button>
+            <button class="btn btn-primary btn-lg">cargar base de datos</button>
         </form>
-
         <hr>
+        <a href="/profile"> atrás </a>
     </div>
 
 </div>
