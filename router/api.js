@@ -49,7 +49,7 @@ router.get('/usuarios/:id', function(req, res, next) {
 		console.log(req.params.id);
 		models.Usuario.findAll({
 			where: {
-				id: req.params.id
+				id: req.params.id,
 			}
 		}).then(function (user) {
 			//for(var x=0;x<user.length;x++){
@@ -90,11 +90,9 @@ try{
 	}
 });
 
-//funcion del admistrador
-router.put('/usuarios/:id', function(req,res,next){
+router.put('/usuarios/', function(req,res,next){
 	try{
-
-		models.Usuario.findOne({ where: {id:req.params.id} }).then(function (user) {
+		models.Usuario.findOne({where : { id:req.user.id }}).then(function (user) {
 			//for(var x=0;x<user.length;x++){
 			//console.log(user.username);
 			if(req.body.username){
@@ -113,41 +111,14 @@ router.put('/usuarios/:id', function(req,res,next){
 						res.json(result);
 					})
 				}
-
 			}
-		});
-	}
-	catch(ex){
-		console.error("Internal error:"+ex);
-		return next(ex);
-	}
-});
-
-//funcion del usuario
-router.put('/usuarios/:id', function(req,res,next){
-	try{
-
-		models.Usuario.findOne({ where: {id:req.params.id} }).then(function (user) {
-			//for(var x=0;x<user.length;x++){
-			//console.log(user.username);
-			if(req.body.username){
-				if(req.body.email) {
-					user.updateAttributes({
-						username: req.body.username,
-						email: req.body.email
-					}).then(function (result) {
-						res.json(result);
-					})
-				}
-				else {
-					user.updateAttributes({
-						username: req.body.username
-					}).then(function (result) {
-						res.json(result);
-					})
-				}
-
-			}
+			else if(req.body.email) {
+				user.updateAttributes({
+					email: req.body.email
+				}).then(function (result) {
+					res.json(result);
+				})
+			};
 		});
 	}
 	catch(ex){
@@ -185,4 +156,3 @@ router.post('/Cargar_base_de_datos',function (req,res,next) {
 		return next(ex);
 	}
 });
-

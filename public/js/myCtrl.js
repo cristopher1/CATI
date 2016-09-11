@@ -3,14 +3,11 @@
  */
 var app = angular.module("myApp",[]);
 
-app.controller("myCtrl", function($scope,$http,$window) {
+app.controller("myCtrl", function($scope,$http) {
     $scope.title="Listar Usuario";
     $scope.title2="Registrar Usuario";
     $scope.formData = {};
-    $scope.modificar = true;
-    $scope.nombre = false;
-    $scope.correo = false;
-    $scope.contrasenna = false;
+    //$scope.session = Session;
     /*$scope.firstName = "John";
     $scope.lastName= "Doe";*/
     $http.get('/api/usuarios')
@@ -48,22 +45,15 @@ app.controller("myCtrl", function($scope,$http,$window) {
 
     //probar esta funcion
     $scope.modificarUsuario = function(id) {
-        $http.put('/api/usuarios/' + id, {username: nombre, email: correo})
-            .success(function(data) {
-                $scope.todos = data;
+        $http.put('/api/usuarios/', $scope.formData)
+            .success(function() {
                 alert("se han guardado los datos correctamente");
-                console.log(data);
             })
             .error(function(data) {
-                alert("no se pudieron guardar los datos");
                 console.log('Error:' + data);
+                alert("no se pudieron guardar los datos");
             });
-
     };
-
-    $scope.modificar_datos = function () {
-        $scope.modificar = false;
-    }
 
 });
 
@@ -88,6 +78,10 @@ app.controller("conecction_excel", function ($scope, $http) {
         });
     }
 });
+
+
+
+
 
 /*app.controller("mysCtrl", function($scope,$http) {
     //$scope.title = "Listar Usuario";
