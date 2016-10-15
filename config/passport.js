@@ -17,8 +17,8 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host     : '127.0.0.1',
     user     : 'root',
-    password: 'dragon5000',
-    database: 'fisw'
+    password : 'ragnarok1',
+    database : 'fisw'
 });
 
 connection.query('USE fisw');
