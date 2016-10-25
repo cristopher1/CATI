@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>menú del proyecto</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <script src="/js/myCtrl.js"></script>
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body ng-controller="myCtrl">
+<div class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Bienvenido</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h1>Menú del proyecto</h1>
+                <div ng-show = "permisos[0] == 'ADMIN'">cargar base de datos<a href="/cargar_base_de_datos"> ir </a>.</div>
+                <div ng-show = "permisos[0] == 'ENCUESTADOR'"> Llamar <a href="/llamar"> ir </a>.<br></div>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="/listar_proyecto">atrás</a>
+</body>
+
+</html>

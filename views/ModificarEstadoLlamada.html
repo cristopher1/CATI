@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "myApp">
+<head>
+    <title>Modificar usuario</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <script src="/js/myCtrl.js"></script>
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container" ng-controller="myCtrl">
+    <div class="col-sm-6 col-sm-offset-3">
+        <!-- LOGIN FORM -->
+        <form>
+            <div class="form-group">
+                <h1>Cambiar estado de llamada</h1><br>
+                <label>Nuevo estado</label>
+                <select title = "seleccione estado de llamada" class="form-control input-lg text-center" name="estado llamada" ng-model="formData.nuevoEstado" required/>
+                <option value="si">si</option>
+                <option value="no">no</option>
+                </select>
+            </div>
+            <button class="btn btn-primary btn-lg" ng-click="modificarEstado()">Modificar</button>
+        </form>
+        <hr>
+    </div>
+
+</div>
+</body>
+</html>

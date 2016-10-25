@@ -31,14 +31,15 @@
                     <strong>El correo que utilizo para esta cuenta es: </strong><br>
                     <strong>email</strong>: <%= user.email %><br>
                     <p>menú</p>
-                    <div ng-hide=""> ver usuarios <a href="/VerUsuario"> ir </a>. <br> cargar base de datos<a href="/cargar_base_de_datos"> ir </a></div>
-                    <div ng-hide=""> Llamar <a href="/llamar"> ir </a>.<br> Modificar perfil <a href="/modificar_usuario"> ir </a>.</div>
+                    <div ng-repeat = "usuario in permisos">
+                        <div ng-show = "usuario == 'ADMIN'">ver usuarios <a href="/VerUsuario"> ir </a>. <br> crear usuario <a href="/crearUsuario"> ir </a>. <br> crear proyecto<a href="/crear_proyecto"> ir </a>. <br>  </div>
+                        <div> listar proyecto <a href="/listar_proyecto"> ir </a>. <br> Modificar perfil <a href="/modificar_usuario"> ir </a>.</div>
+                    </div>
                 </p>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 
 </html>

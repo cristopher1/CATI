@@ -19,16 +19,16 @@
 <div class="container" ng-controller="myCtrl">
     <div class="col-sm-6 col-sm-offset-3">
         <!-- LOGIN FORM -->
-        <form ref="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+        <form>
             <div class="form-group">
-                <h1>Cargar base de datos</h1><br>
-                <label>seleccione un archivo</label>
-                <input type="file" name="archivo">
+                <%= exito %>
+                <h1>Cargar a la base de datos</h1><br>
             </div>
-            <button class="btn btn-primary btn-lg">cargar base de datos</button>
+            <button class="btn btn-primary btn-lg" ng-click="cargarBase()">Modificar</button>
         </form>
         <hr>
-        <a href="/profile"> atrás </a>
+
+        <a href="/menu"> atrás </a>
     </div>
 
 </div>

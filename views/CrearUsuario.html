@@ -72,7 +72,6 @@
 </nav>
 
     <h1>{{title2}}</h1>
-<h3>Hora de ponerse serios!!!</h3>
 
 <!--<form class="form-horizontal" role="form" ng-submit="saveUser()">
                 <fieldset>
@@ -161,10 +160,10 @@
         <div class="col-sm-8 col-sm-offset-2 text-center">
             <form>
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg text-center" placeholder="Inserta un usuario nuevo" ng-model="formData.username">
-                     <input type="text" class="form-control input-lg text-center" placeholder="Inserta un password nuevo" ng-model="formData.password">
-                     <input type="text" class="form-control input-lg text-center" placeholder="Inserta un email nuevo" ng-model="formData.email">
-                     <select class="form-control input-lg text-center" id="permiso" name="permiso" ng-model="formData.permiso">
+                    <input title = "insertar un nombre" type="text" class="form-control input-lg text-center" placeholder="Inserta nombre de usuario" ng-model="formData.username" required/>
+                     <input title = "insertar una contraseña" type="text" class="form-control input-lg text-center" placeholder="Inserta contraseña" ng-model="formData.password" required/>
+                     <input title = "insertar un email" type="email" class="form-control input-lg text-center" placeholder="Inserta email" ng-model="formData.email" required/>
+                     <select title = "seleccione admin o encuestador" class="form-control input-lg text-center" id="permiso" name="permiso" ng-model="formData.permiso" required/>
                             <option value="ADMIN">ADMIN</option>
                             <option value="ENCUESTADOR">ENCUESTADOR</option>
                      </select>
@@ -175,7 +174,7 @@
             </form>
         </div>
     </div>
-
+    <a href="/profile"> atrás </a>
 
 
   </body>
