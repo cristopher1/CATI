@@ -139,7 +139,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/modificar_estado', isLoggedIn,function (req, res) {
-        if(req.user.permiso == "ADMIN") {
+        if(req.user.permiso == "ENCUESTADOR") {
             res.render('ModificarEstadoLlamada.html');
         }else{
             res.render('profile.html', {

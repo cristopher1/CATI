@@ -223,15 +223,26 @@ app.controller("myCtrl", function($scope,$http) {
         $scope.formData.idcontacto = localStorage.getItem("IdContacto");
         $scope.id = localStorage.getItem("IdProyecto");
         $http.put('/api/llamada/' + $scope.id, $scope.formData)
-            .success(function() {
-                alert("se han guardado los datos correctamente");
-                location.href = "Llamar"
+            .success(function(resultado) {
+                alert(resultado);
+                if(resultado[0] != "no ha ingresado datos"){
+                    location.href = "Llamar"
+                }
             })
             .error(function(data) {
                 console.log('Error:' + data);
                 alert("no se pudieron guardar los datos");
             });
     };
+
+    $http.get('/api/usuario/' + localStorage.getItem("IdProyecto"))
+        .success(function(data) {
+            $scope.usuarios = data;
+            console.log(data)
+        })
+        .error(function(data) {
+            console.log('Error: ' + data);
+        });
 
     $http.get('/api/contacto/' + localStorage.getItem("IdProyecto"))
         .success(function(data) {
