@@ -316,8 +316,9 @@ router.delete('/usuarioProyectoQuitar/:id/:idProyecto', function(req,res,next){
 //modificar llamadas//
 router.put('/llamada/:id', function(req,res,next){
 	var resultado = []
+	console.log(req.body);
 	try{
-		if(req.body.nuevoEstado) {
+		if(req.body.RealizarLlamada) {
 			models.Contacto.findOne({
 				where: {
 					id: req.body.idcontacto,
@@ -327,14 +328,14 @@ router.put('/llamada/:id', function(req,res,next){
 				//for(var x=0;x<user.length;x++){
 				//console.log(user.username);
 				llamada.updateAttributes({
-					estadoDeLlamada: req.body.nuevoEstado,
+					estadoDeLlamada: "si",
 				}).then(function () {
 					resultado.push("se han modificado los datos exitosamente")
 					res.json(resultado);
 				})
 			})
 		}else{
-			resultado.push("no ha ingresado datos")
+			resultado.push("No se realizo llamada")
 			res.json(resultado);
 		}
 	}

@@ -69,6 +69,16 @@ module.exports = function(app, passport) {
         }
     });
 
+    app.get('/cargar_base_de_datos/:error', isLoggedIn, function (req, res) {
+        if(req.user.permiso == "ADMIN"){
+            res.render('SubirArchivo.html', {error: req.params.error});
+        }else{
+            res.render('profile.html', {
+                user : req.user
+            });
+        }
+    });
+
     app.get('/llamar', isLoggedIn, function (req, res) {
         res.render('Llamar.html');
     });
@@ -138,6 +148,7 @@ module.exports = function(app, passport) {
         res.render('Menu.html');
     });
 
+
     app.get('/modificar_estado', isLoggedIn,function (req, res) {
         if(req.user.permiso == "ENCUESTADOR") {
             res.render('ModificarEstadoLlamada.html');
@@ -150,7 +161,13 @@ module.exports = function(app, passport) {
 
     app.get('/guardarArchivo', isLoggedIn,function (req,res) {
         console.log(req)
-        res.render("CargarBaseDeDatos.html", {exito: "archivo valido, haga click en el botón para cargar la base de datos"});
+        if(req.user.permiso == "ADMIN"){     
+            res.render("CargarBaseDeDatos.html", {exito: "archivo valido, haga click en el botón para cargar la base de datos"});
+        }else{
+            res.render('profile.html',{
+                user: req.user
+            })
+        }
     })
 
     app.post('/upload',isLoggedIn,function(req, res) {
@@ -160,15 +177,18 @@ module.exports = function(app, passport) {
         var i = 0
         var data = []
         if (!req.files) {
-            res.render("SubirArchivo.html", {error: "no selecciono archivo"});
+            res.redirect("/cargar_base_de_datos/" + "no selecciono archivo");
         }
         try {
             sampleFile = req.files.archivo;
-            console.log(sampleFile.mimetype)
-            if (sampleFile.mimetype == "application/vnd.ms-excel"){
+            var dato = "" + sampleFile.name + ""
+            var extension = dato.split(".")
+            var ultimoElemento = extension.length;
+
+            if (ultimoElemento >= 2 && extension[(ultimoElemento - 1)] == "csv"){
                 sampleFile.mv('./conection/' + sampleFile.name, function (err) {
                     if (err) {
-                        res.render("SubirArchivo.html", {error: "archivo no es valido"})
+                        res.redirect("/cargar_base_de_datos/" + "archivo no es valido");
                     }
                     else {
                         //verifica si hay cuatro campos en el archivo//
@@ -182,7 +202,7 @@ module.exports = function(app, passport) {
                             i++;
                         }).on('end', function () {
                             if(verificar_errores != 0){
-                                res.render("SubirArchivo.html", {error: "el archivo no tiene la estructura: Nombre; Apellido; Número telefonico; Estado de la llamada"})
+                                res.redirect("/cargar_base_de_datos/" + "el archivo no tiene la estructura: Nombre; Apellido; Número telefonico; Estado de la llamada")
                             }
                             else {
                                 res.redirect("/guardarArchivo");
@@ -192,11 +212,11 @@ module.exports = function(app, passport) {
                 });
             }
             else{
-                res.render("SubirArchivo.html", {error: "El archivo no tiene extensión .csv"})
+                res.redirect("/cargar_base_de_datos/" + "El archivo no tiene extensión .csv")
             }
         }
         catch (ex){
-            res.render("SubirArchivo.html", {error: "Error en el archivo"})
+            res.redirect("/cargar_base_de_datos/" + "Error en el archivo")
         }
 
     })

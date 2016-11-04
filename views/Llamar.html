@@ -12,6 +12,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
+    <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
     <script src="/js/myCtrl.js"></script>
 
 </head>
@@ -63,7 +64,6 @@
 <div>
     <h1>Llamar</h1>
 </div>
-
 <table class="table">
     <thead>
     <tr>
@@ -79,11 +79,12 @@
         <td><div ng-bind = "contacto.nombre"></div></td>
         <td><div ng-bind = "contacto.apellido"></div></td>
         <td><div ng-bind = "contacto.numero"></div></td>
-        <td><div ng-bind = "contacto.estadoDeLlamada"></div></td>
-        <td> <button ng-show = "contactos[0] != 'no hay contactos'" ng-click="Llamar(contacto.numero, contacto.id)">Llamar</button></td>
+        <td>{{contacto.estadoDeLlamada}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button ng-click="modificarEstado()">Modificar</button></td>
+        <td><button ng-show = "contactos[0] != 'no hay contactos'" ng-click="Llamar(contacto.numero, contacto.id)">Llamar</button><div id="call_32"></div></td>
     </tr>
     </tbody>
 </table>
+    
 <a href="/menu">atrás</a>
 
 </body>

@@ -215,18 +215,27 @@ app.controller("myCtrl", function($scope,$http) {
     }
 
     $scope.Llamar = function (numero,id){
-        localStorage.setItem("IdContacto", id)
-        location.href = "llamar"
+        localStorage.setItem("IdContacto", id);
+        localStorage.setItem("llamadaRealizada",true);
+        //Skype.ui({
+          //  name: "call",
+            //element: "call_32",
+        //    participants: ["+569"+numero]
+        //});
+        //Skype.tryAnalyzeSkypeUri('call', '0');
+        location.href = "skype:"+"+569"+numero+"?call";
+        //document.getElementById("call_32").innerHTML = "";
     }
 
     $scope.modificarEstado = function() {
         $scope.formData.idcontacto = localStorage.getItem("IdContacto");
+        $scope.formData.RealizarLlamada = localStorage.getItem("llamadaRealizada");
         $scope.id = localStorage.getItem("IdProyecto");
         $http.put('/api/llamada/' + $scope.id, $scope.formData)
             .success(function(resultado) {
+                location.href = "Llamar"
                 alert(resultado);
                 if(resultado[0] != "no ha ingresado datos"){
-                    location.href = "Llamar"
                 }
             })
             .error(function(data) {
