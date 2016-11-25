@@ -244,6 +244,21 @@ app.controller("myCtrl", function($scope,$http) {
             });
     };
 
+    $scope.crear_encuesta = function() {
+        var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        document.getElementById("encuesta").innerHTML='<iframe src="https://www.surveymonkey.com/r/?sm=eVUWDcfU7hYednmsP7LuA7c56Eh6QxtqEjI9_2FtRYOwo_3D" width='+w+' height=400></iframe>';
+    };
+
+    $scope.ancho = function() {
+        var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        return  w;
+    };
+
+    $scope.alto = function() {
+        var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        return  h;
+    };
+
     $http.get('/api/usuario/' + localStorage.getItem("IdProyecto"))
         .success(function(data) {
             $scope.usuarios = data;

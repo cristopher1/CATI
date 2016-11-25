@@ -87,6 +87,10 @@ module.exports = function(app, passport) {
         res.render('ModificarUsuario.html');
     });
 
+    app.get('/crear_encuesta',isLoggedIn,function (req, res) {
+        res.render('crearEncuesta.html');
+    });
+
     app.get('/crear_proyecto', isLoggedIn,function (req, res) {
         if(req.user.permiso == "ADMIN") {
             res.render('CrearProyecto.html');

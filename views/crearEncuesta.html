@@ -12,11 +12,11 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js"></script>
-    <script type="text/javascript" src="http://www.skypeassets.com/i/scom/js/skype-uri.js"></script>
     <script src="/js/myCtrl.js"></script>
 
 </head>
-<body ng-controller="myCtrl">
+<body>
+<div  ng-controller="myCtrl">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -55,36 +55,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-
-<div>
-    <h1>Llamar</h1>
-</div>
-<table class="table">
-    <thead>
-    <tr>
-        <th> Nombre </th>
-        <th> Apellido </th>
-        <th> Número </th>
-        <th> Estado de la llamada </th>
-        <th> Llamar</th>
-        <th> Llamar</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat = "contacto in contactos">
-        <td><div ng-bind = "contacto.nombre"></div></td>
-        <td><div ng-bind = "contacto.apellido"></div></td>
-        <td><div ng-bind = "contacto.numero"></div></td>
-        <td>{{contacto.estadoDeLlamada}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button ng-show = "contactos[0] != 'no hay contactos'" ng-click="modificarEstado()">Modificar</button></td>
-        <td><button ng-show = "contactos[0] != 'no hay contactos'" ng-click="Llamar(contacto.numero, contacto.id)">Llamar</button><div id="call_32"></div></td>
-        <td><button ng-show = "contactos[0] != 'no hay contactos'" ng-click="crear_encuesta()">Crear Encuesta</button></td>
-    </tr>
-    </tbody>
-</table>
-
-<div id="encuesta"></div>
-
-<a href="/menu">atrás</a>
+<iframe src="https://www.surveymonkey.com/create/?ut_source=create_survey&ut_source2=li_home_bottom" height={{alto()}} width={{ancho()}}></iframe>
 
 </body>
 </html>
