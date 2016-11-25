@@ -174,6 +174,26 @@ module.exports = function(app, passport) {
         }
     })
 
+    app.get('/descargarAudio', isLoggedIn, function (req, res) {
+        if(req.user.permiso == "ADMIN"){
+            res.render("DescargarAudio.html", {error: ""})
+        }else{
+            res.render('profile.html',{
+                user: req.user
+            })
+        }
+    })
+
+    app.get('/descargarAudio/:error', isLoggedIn, function (req, res) {
+        if(req.user.permiso == "ADMIN"){
+            res.render("DescargarAudio.html", {error: req.params.error})
+        }else{
+            res.render('profile.html',{
+                user: req.user
+            })
+        }
+    })
+
     app.post('/upload',isLoggedIn,function(req, res) {
         var sampleFile;
         var csv = require('ya-csv');
@@ -225,6 +245,18 @@ module.exports = function(app, passport) {
 
     })
 
+    app.get('/descarga_audio/:archivo', function (req, res, next) {
+        var dato = (__dirname).split("router")
+        console.log(dato);
+        console.log(__dirname);
+        console.log(req.params.archivo);
+        console.log(dato[0] + 'audio/' + req.params.archivo);
+        console.log(dato[0] + 'audio\\' + req.params.archivo);
+        res.download(dato[0] + 'audio\\' + req.params.archivo , req.params.archivo, function (err) {
+            if(err) console.log("Error: "+err);
+            else next();
+        });
+    });
 }
 
 
@@ -238,20 +270,3 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
-
-/*
-var resultado=[];
-var csv = require('ya-csv');
-i = 0
-var reader = csv.createCsvFileReader('./conection/'+sampleFile.name);
-var data = [];
-reader.on('data', function(rec) {
-    if(i != 0){
-        data.push(rec);
-        console.log(rec[1])
-    }
-    i++;
-}).on('end', function() {
-    console.log(data);
-});
-*/

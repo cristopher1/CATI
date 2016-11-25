@@ -295,4 +295,13 @@ app.controller("myCtrl", function($scope,$http) {
             console.log('Error: ' + data);
         });
 
+    $http.get('/api/mostrarAudios/' + localStorage.getItem("IdProyecto"))
+        .success(function (data) {
+            $scope.misAudios = data
+            console.log(data)
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        })
+
 });
