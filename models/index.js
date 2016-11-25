@@ -12,7 +12,7 @@ var opts = {
         freezeTableName: true
     }
 }
-var sequelize = new Sequelize('fisw', 'root', 'ragnarok1',opts);
+var sequelize = new Sequelize('fisw', 'root', 'dragon5000',opts);
 var db        = {};
 
 fs

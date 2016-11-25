@@ -466,3 +466,55 @@ router.get('/usuarioQuitar/:idProyecto', function(req, res, next) {
 		return next(ex);
 	}
 });
+
+/*
+router.get('/descargar_audio/:nombre', function (req, res) {
+        var dato = (__dirname).split("router")
+        console.log("aaaa")
+        res.redirect("/routes/descargar_audio/" + req.params.nombre)
+
+    //res.redirect('/routes/descargar_audio/' + req.params.nombre)
+});
+*/
+
+router.get('/mostrarAudios/:id', function (req, res, next) {
+    var fs = require("fs");
+    var misArchivos = []
+    fs.readdir('./audio', function(err,files) {
+        if(req.params.id) {
+            for (var i = 0; i < files.length; i++) {
+                if ((files[i].split("_"))[0] == req.params.id) {
+                    misArchivos.push(files[i])
+                }
+            }
+            console.log(misArchivos)
+        }
+
+        if(misArchivos.length == 0){
+            misArchivos.push("No se encontraron audios asociados a este proyecto")
+        }
+        res.json (misArchivos);
+	})
+})
+/*
+
+ var fs = require("fs");
+ fs.readdir('./audio', function(err,files) {
+ res.json (files);
+ })
+
+
+var fs = require("fs");
+var misArchivos = []
+fs.readdir('./audio', function(err,files) {
+    if(req.params.id) {
+        for (var i = 0; i < files.length; i++) {
+            if (files[i].split("_") == req.params.id) {
+                misArchivos.push(files[i])
+            }
+        }
+        console.log(misArchivos)
+    }
+    res.json (misArchivos);
+})
+ */
