@@ -190,7 +190,8 @@ router.post('/proyectos', function(req,res,next){
 		var resultado=[];
 		if(req.body.nombreProyecto) {
 			models.Proyecto.create({
-				nombreProyecto: req.body.nombreProyecto
+				nombreProyecto: req.body.nombreProyecto,
+				urlEncuesta: req.body.urlEncuesta
 			}).then(function (proyecto) {
 				models.UsuarioProyecto.create({
 						UsuarioId: req.user.id,
@@ -254,25 +255,65 @@ router.get('/proyectos', function(req, res, next) {
 //modificar proyectos//
 router.put('/proyectos/:id', function(req,res,next){
     try{
-    	if(req.body.nombreProyecto) {
-			models.Proyecto.findOne({where: {id: req.params.id}}).then(function (proyecto) {
-				//for(var x=0;x<user.length;x++){
-				//console.log(user.username);
+    	models.Proyecto.findOne({where: {id: req.params.id}}).then(function (proyecto) {
+			//for(var x=0;x<user.length;x++){
+			//console.log(user.username);
+			if(req.body.nombreProyecto) {
+				if(req.body.urlEncuesta) {
+					proyecto.updateAttributes({
+						nombreProyecto: req.body.nombreProyecto,
+						urlEncuesta: req.body.urlEncuesta
+					}).then(function (result) {
+						res.json(result);
+					})
+				} else {
+					proyecto.updateAttributes({
+						nombreProyecto: req.body.nombreProyecto
+					}).then(function (result) {
+						res.json(result);
+					})
+				}
+			}
+			else if(req.body.urlEncuesta){
 				proyecto.updateAttributes({
-					nombreProyecto: req.body.nombreProyecto,
+					urlEncuesta:req.body.urlEncuesta
 				}).then(function (result) {
 					res.json(result);
 				})
-			})
-		}else{
-			var resultado = []
-			res.json(resultado);
-		}
-    }
+			}
+			else {
+				var resultado = [];
+				res.json(resultado);
+			}
+		});
+	}
     catch(ex){
         console.error("Internal error:"+ex);
         return next(ex);
     }
+});
+
+//GET un proyecto con id determinado
+router.get('/proyectos/:id', function(req, res, next) {
+	try {
+		//var query = url.parse(req.url,true).query;
+		//console.log(query);
+		console.log(req.params.id);
+		models.Proyecto.findAll({
+			where: {
+				id: req.params.id,
+			}
+		}).then(function (user) {
+			//for(var x=0;x<user.length;x++){
+			//console.log(user[x].username);
+			//console.log(user.get('username'));
+			res.json(user);
+			//}
+		});
+	} catch (ex) {
+		console.error("Internal error:" + ex);
+		return next(ex);
+	}
 });
 
 //agregar usuario a proyecto//

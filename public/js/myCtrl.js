@@ -245,8 +245,9 @@ app.controller("myCtrl", function($scope,$http) {
     };
 
     $scope.crear_encuesta = function() {
+        console.log($scope.uno_proyecto[0].urlEncuesta);
         var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        document.getElementById("encuesta").innerHTML='<iframe src="https://www.surveymonkey.com/r/?sm=eVUWDcfU7hYednmsP7LuA7c56Eh6QxtqEjI9_2FtRYOwo_3D" width='+w+' height=400></iframe>';
+        document.getElementById("encuesta").innerHTML='<iframe src='+$scope.uno_proyecto[0].urlEncuesta+' width='+w+' height=400></iframe>';
     };
 
     $scope.ancho = function() {
@@ -258,6 +259,14 @@ app.controller("myCtrl", function($scope,$http) {
         var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
         return  h;
     };
+
+    $http.get('/api/proyectos/' + localStorage.getItem("IdProyecto"))
+        .success(function(data) {
+            $scope.uno_proyecto = data;
+        })
+        .error(function(data) {
+            console.log('Error: '+ data);
+        });
 
     $http.get('/api/usuario/' + localStorage.getItem("IdProyecto"))
         .success(function(data) {

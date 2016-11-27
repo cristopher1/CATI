@@ -6,6 +6,7 @@ var Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
     var Proyecto = sequelize.define("Proyecto", {
         nombreProyecto: DataTypes.STRING,
+        urlEncuesta: DataTypes.STRING
     }, {
         classMethods: {
             associate: function(models) {
