@@ -233,6 +233,7 @@ app.controller("myCtrl", function($scope,$http) {
         $scope.id = localStorage.getItem("IdProyecto");
         $http.put('/api/llamada/' + $scope.id, $scope.formData)
             .success(function(resultado) {
+                localStorage.setItem("llamadaRealizada",false);
                 location.href = "Llamar"
                 alert(resultado);
                 if(resultado[0] != "no ha ingresado datos"){
@@ -245,7 +246,6 @@ app.controller("myCtrl", function($scope,$http) {
     };
 
     $scope.crear_encuesta = function() {
-        console.log($scope.uno_proyecto[0].urlEncuesta);
         var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         document.getElementById("encuesta").innerHTML='<iframe src='+$scope.uno_proyecto[0].urlEncuesta+' width='+w+' height=400></iframe>';
     };
@@ -259,6 +259,26 @@ app.controller("myCtrl", function($scope,$http) {
         var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
         return  h;
     };
+
+    $scope.admin = function() {
+        if ($scope.permisos == "ADMIN") {
+            return true;
+        }
+        else return false;
+    };
+
+    $scope.encuestador = function() {
+        if ($scope.permisos == "ENCUESTADOR") {
+            return true;
+        }
+        else return false;
+    };
+
+    $scope.perm = function() {
+        if ($scope.permisos == "ADMIN") return true;
+        else if ($scope.permisos == "ENCUESTADOR") return true;
+        else return false;
+    }
 
     $http.get('/api/proyectos/' + localStorage.getItem("IdProyecto"))
         .success(function(data) {
@@ -299,6 +319,7 @@ app.controller("myCtrl", function($scope,$http) {
         .success(function(data) {
             $scope.permisos = data;
             console.log(data)
+            console.log($scope.admin())
         })
         .error(function(data) {
             console.log('Error: ' + data);

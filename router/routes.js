@@ -88,7 +88,13 @@ module.exports = function(app, passport) {
     });
 
     app.get('/crear_encuesta',isLoggedIn,function (req, res) {
-        res.render('crearEncuesta.html');
+        if(req.user.permiso == "ADMIN") {
+            res.render('crearEncuesta.html');
+        } else {
+            res.render('profile.html', {
+                user : req.user
+            });
+        }
     });
 
     app.get('/crear_proyecto', isLoggedIn,function (req, res) {

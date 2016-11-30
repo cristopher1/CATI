@@ -375,7 +375,7 @@ router.put('/llamada/:id', function(req,res,next){
 					res.json(resultado);
 				})
 			})
-		}else{
+		} else {
 			resultado.push("No se realizo llamada")
 			res.json(resultado);
 		}

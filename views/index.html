@@ -14,7 +14,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -42,7 +41,21 @@
         <!--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
         <li><a href="#">Link</a></li>-->
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Proyecto <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="divider"></li>
+            <li><a href="/listar_proyecto">Lista Proyecto</a></li>
+            <li class="divider"></li>
+            <li><a href="/crear_proyecto">Crear Proyecto</a></li>
+          </ul>
+        </li>
+
+        <li><a href="/crear_encuesta">Crear Encuesta</a></li>
+
+
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"  data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/verUsuario">Ver Usuario</a></li>
             <li><a href="/crearUsuario">Crear Usuario</a></li>
@@ -67,6 +80,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido Usuario! <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li><a href="/login">Iniciar Sesión</a></li>
+            <li class="divider"></li>
             <li><a href="/profile">Ver Perfil</a></li>
             <li><a href="/modificar_usuario">Modificar Perfil</a></li>
             <li><a href="/logout">Cerrar Sesión</a></li>
