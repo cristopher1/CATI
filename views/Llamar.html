@@ -41,6 +41,7 @@
                     <li><a href="/listar_proyecto">Lista Proyecto</a></li>
                     <li class="divider"></li>
                     <li><a href="/crear_proyecto">Crear Proyecto</a></li>
+                    <li><a href="/modificar_proyecto">Modificar Proyecto</a></li>
                   </ul>
                 </li>
 
@@ -79,7 +80,7 @@
         <th> Número </th>
         <th> Estado de la llamada </th>
         <th> Llamar</th>
-        <th> Llamar</th>
+        <th> Encuesta</th>
     </tr>
     </thead>
     <tbody>
@@ -87,16 +88,20 @@
         <td><div ng-bind = "contacto.nombre"></div></td>
         <td><div ng-bind = "contacto.apellido"></div></td>
         <td><div ng-bind = "contacto.numero"></div></td>
-        <td><div ng-bind = "contacto.estadoDeLlamada"></div><button class="btn btn-warning" ng-show = "contactos[0] != 'no hay contactos'" ng-click="modificarEstado()">Modificar Estado</button>
-        <!--<div class="form-group">
-      <div class="col-lg-10">
-        <select class="form-control" id="select">
-          <option>por llamar</option>
-          <option>respondio</option>
-          <option>no contesta</option>
-          <option>no existe</option>
-          <option>equivocado</option>
-        </select></div></div>--></td>
+        <td><!--<div ng-bind = "contacto.estadoDeLlamada"></div><button class="btn btn-warning" ng-show = "contactos[0] != 'no hay contactos'" ng-click="modificarEstado()">Modificar Estado</button>-->
+        <div class="form-group">
+            <div class="col-lg-10">
+                <select class="form-control" id="select" ng-model="formData.estado">
+                  <option>por llamar</option>
+                  <option>respondio</option>
+                  <option>no contesta</option>
+                  <option>no existe</option>
+                  <option>equivocado</option>
+                </select>
+                <button class="btn btn-warning" ng-show = "contactos[0] != 'no hay contactos'" ng-click="modificarEstado()">Modificar Estado</button>
+                </div>
+                </div>
+                </td>
         <td><button class="btn btn-primary" ng-show = "contactos[0] != 'no hay contactos'" ng-click="Llamar(contacto.numero, contacto.id)">Llamar</button><div id="call_32"></div></td>
         <td><button class="btn btn-primary" ng-show = "contactos[0] != 'no hay contactos'" ng-click="crear_encuesta()">Crear Encuesta</button></td>
     </tr>

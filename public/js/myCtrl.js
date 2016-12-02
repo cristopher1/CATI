@@ -217,17 +217,21 @@ app.controller("myCtrl", function($scope,$http) {
     $scope.Llamar = function (numero,id){
         localStorage.setItem("IdContacto", id);
         localStorage.setItem("llamadaRealizada",true);
+        console.log(numero.length);
+        if (numero.length == 9) location.href = "skype:+56"+numero+"?call";
+        else if (numero.length == 11) location.href = "skype:+"+numero+"?call";
+        else if (numero.length == 12) location.href = "skype:"+numero+"?call";
         //Skype.ui({
           //  name: "call",
             //element: "call_32",
         //    participants: ["+569"+numero]
         //});
         //Skype.tryAnalyzeSkypeUri('call', '0');
-        location.href = "skype:"+"+569"+numero+"?call";
         //document.getElementById("call_32").innerHTML = "";
     }
 
     $scope.modificarEstado = function() {
+        console.log($scope.formData.estado)
         $scope.formData.idcontacto = localStorage.getItem("IdContacto");
         $scope.formData.RealizarLlamada = localStorage.getItem("llamadaRealizada");
         $scope.id = localStorage.getItem("IdProyecto");

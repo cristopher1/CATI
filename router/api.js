@@ -359,7 +359,7 @@ router.put('/llamada/:id', function(req,res,next){
 	var resultado = []
 	console.log(req.body);
 	try{
-		if(req.body.RealizarLlamada) {
+		if(req.body.RealizarLlamada == "true") {
 			models.Contacto.findOne({
 				where: {
 					id: req.body.idcontacto,
@@ -369,7 +369,7 @@ router.put('/llamada/:id', function(req,res,next){
 				//for(var x=0;x<user.length;x++){
 				//console.log(user.username);
 				llamada.updateAttributes({
-					estadoDeLlamada: "si",
+					estadoDeLlamada: req.body.estado,
 				}).then(function () {
 					resultado.push("se han modificado los datos exitosamente")
 					res.json(resultado);
@@ -437,7 +437,7 @@ router.post('/Cargar_base_de_datos/:id',function (req,res,next) {
 //GET contactos, obtener contactos al azar
 router.get('/contacto/:id', function(req, res, next) {
 	try {
-		models.Contacto.findAll({where: {ProyectoId: req.params.id, estadoDeLlamada: "no"}}).then(function (user) {
+		models.Contacto.findAll({where: {ProyectoId: req.params.id, estadoDeLlamada: "por llamar"}}).then(function (user) {
 			var resultado = []
 			if(user != 0) {
 				var aleatorio = Math.round(Math.random() * ((user.length) - 1))
